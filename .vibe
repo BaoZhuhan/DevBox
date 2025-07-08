@@ -1,0 +1,49 @@
+那么首先，我希望获得你的建议，我们做一个什么样的软件比较好？这需要满足两个条件：1.它方便展示 MCP server 在各个阶段的作用 2.它的开发所需要的环境较为简单，且不太需要太多复杂的框架，适合使用 vscode 完成
+
+非常好的问题！为了方便展示 MCP Server 在 SDLC 各阶段的作用，并确保开发环境轻量、易上手、适合 VS Code 开发体验，我为你设计了以下三个候选软件项目，每一个都满足你的两个条件：
+
+⸻
+
+✅ 推荐项目：容器化 DevTool 在线面板（DevBox）
+
+🧩 项目概念
+
+一个基于 Web 的轻量工具平台，用户可以点击启动容器，运行各种开发工具或服务（如 Jupyter、MySQL、Nginx），并看到日志或访问入口。
+
+⸻
+
+🎯 为什么选它？
+
+条件	理由
+展示 MCP Server 功能	你可以演示 MCP 如何在不同阶段操作 Docker、读取 YAML、部署 Compose、分析日志等。
+开发环境简单	只需 Node.js（或 Python）+ HTML 前端，不需要复杂框架。
+VS Code 开发适配好	主要是后端 API + YAML + JSON + Markdown，VS Code 无压力；Copilot 插件体验非常流畅。
+适合自然语言驱动	“部署一个新的 nginx 容器”“查看 devtools 容器日志”这样的请求完全可以走 MCP 路径。
+
+
+⸻
+
+🛠️ 技术选型建议
+	•	后端：Node.js + Express 或 Python Flask
+	•	前端：纯 HTML + Tailwind 或 vite + vue-lite（可选）
+	•	数据结构：使用 JSON 存储服务定义
+	•	容器调度：Docker CLI + Compose
+	•	MCP Server 覆盖面广：
+	•	docker-mcp：部署服务、创建容器
+	•	fs-mcp：读取 YAML 配置
+	•	log-mcp（或自写）：读取容器日志
+	•	git-mcp：版本控制 + 发布配置变更
+	•	time-mcp：调度定时任务或重启周期
+	•	openapi-mcp（可选）：为你的 DevBox 提供接口定义文档支持
+
+⸻
+
+📈 示例功能模块（方便分别演示 SDLC 阶段）
+
+模块	示例操作	展示的 MCP
+服务定义管理	编辑 .devbox.json	fs-mcp, git-mcp
+服务启动	启动容器 nginx	docker-mcp
+状态监控	获取日志和运行状态	docker-mcp, log-mcp
+批量部署	根据 .compose.yaml 一键部署多个服务	fs-mcp, docker-mcp
+DevOps 动作	用 MCP Agent 聊天执行 “部署 redis 并暴露端口”	copilot + docker-mcp
+
